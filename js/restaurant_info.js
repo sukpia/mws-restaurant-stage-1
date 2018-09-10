@@ -6,6 +6,7 @@ var newMap;
  */
 document.addEventListener('DOMContentLoaded', (event) => {  
   initMap();
+
 });
 
 /**
@@ -32,6 +33,15 @@ initMap = () => {
       fillBreadcrumb();
       DBHelper.mapMarkerForRestaurant(self.restaurant, self.newMap);
     }
+    // set all focusable items in leaflet map to tabindex of -1, so we cannot tab into them
+    document.querySelector('.leaflet-container').tabIndex = -1;
+    document.querySelector('.leaflet-marker-icon').tabIndex = -1;
+    document.querySelector('.leaflet-control-zoom-in').tabIndex = -1;
+    document.querySelector('.leaflet-control-zoom-out').tabIndex = -1;
+    const leafletLinks = document.querySelectorAll('.leaflet-control-attribution a');
+    leafletLinks.forEach(function(link) {
+      link.tabIndex = -1;
+    });
   });
 }  
  

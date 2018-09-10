@@ -150,17 +150,30 @@ fillRestaurantsHTML = (restaurants = self.restaurants) => {
     ul.append(createRestaurantHTML(restaurant));
   });
   addMarkersToMap();
+
+  // set all focusable items in leaflet map to tabindex of -1, so we cannot tab into them
+  document.querySelector('.leaflet-container').tabIndex = -1;
+  const leafletMarkers = document.querySelectorAll('.leaflet-marker-icon');
+  leafletMarkers.forEach(function(marker) {
+    marker.tabIndex = -1;
+  });
+  document.querySelector('.leaflet-control-zoom-in').tabIndex = -1;
+  document.querySelector('.leaflet-control-zoom-out').tabIndex = -1;
+  const leafletLinks = document.querySelectorAll('.leaflet-control-attribution a');
+  leafletLinks.forEach(function(link) {
+    link.tabIndex = -1;
+  });
 }
 
 /**
  * Create restaurant HTML.
  */
 createRestaurantHTML = (restaurant) => {
-  const li = document.createElement('li');
-
   const tbLink = document.createElement('a');
   tbLink.href = DBHelper.urlForRestaurant(restaurant);
-  li.append(tbLink)
+
+  const li = document.createElement('li');
+  tbLink.append(li);
 
   const image = document.createElement('img');
   image.className = 'restaurant-img';
@@ -169,7 +182,7 @@ createRestaurantHTML = (restaurant) => {
   const imageSrcset = imageLoc.substring(0, imageLoc.length - 4) + "_200px.jpg 360w, " + imageLoc.substring(0, imageLoc.length - 4) + "_400px.jpg 640w, " + imageLoc + " 800w";
   image.setAttribute("srcset", imageSrcset);
   image.setAttribute("sizes", "(max-width: 360px) 200px, (max-width: 640px) 400px, 800px");
-  tbLink.append(image);
+  li.append(image);
 
   const name = document.createElement('h1');
   name.innerHTML = restaurant.name;
@@ -183,13 +196,13 @@ createRestaurantHTML = (restaurant) => {
   address.innerHTML = restaurant.address;
   li.append(address);
 
-  const more = document.createElement('a');
-  more.innerHTML = 'View Details';
-  more.href = DBHelper.urlForRestaurant(restaurant);
-  more.classList.add('normal-link');
-  li.append(more)
-
-  return li
+  // const more = document.createElement('a');
+  // more.innerHTML = 'View Details';
+  // more.href = DBHelper.urlForRestaurant(restaurant);
+  // more.classList.add('normal-link');
+  // li.append(more)
+  // return li
+  return tbLink;
 }
 
 /**
