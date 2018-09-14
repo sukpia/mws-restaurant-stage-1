@@ -103,6 +103,7 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
   const imageSrcset = imageLoc.substring(0, imageLoc.length - 4) + "_200px.jpg 360w, " + imageLoc.substring(0, imageLoc.length - 4) + "_400px.jpg 640w, " + imageLoc + " 800w";
   image.setAttribute("srcset", imageSrcset);
   image.setAttribute("sizes", "(max-width: 360px) 200px, (max-width: 640px) 400px, 800px");
+  image.setAttribute("alt", "Picture of " + restaurant.name);
 
   const cuisine = document.getElementById('restaurant-cuisine');
   cuisine.innerHTML = restaurant.cuisine_type;

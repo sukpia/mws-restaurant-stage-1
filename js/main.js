@@ -5,6 +5,17 @@ var newMap
 var markers = []
 
 /**
+ * Register service worker
+ */
+if (navigator.serviceWorker) {
+  navigator.serviceWorker.register('/sw.js').then(function() {
+    console.log('Service Worker registered Successfully');
+  }).catch(function(error) {
+    console.log('Service Worker Registration failed with ' + error);
+  });
+}
+
+/**
  * Fetch neighborhoods and cuisines as soon as the page is loaded.
  */
 document.addEventListener('DOMContentLoaded', (event) => {
@@ -182,6 +193,7 @@ createRestaurantHTML = (restaurant) => {
   const imageSrcset = imageLoc.substring(0, imageLoc.length - 4) + "_200px.jpg 360w, " + imageLoc.substring(0, imageLoc.length - 4) + "_400px.jpg 640w, " + imageLoc + " 800w";
   image.setAttribute("srcset", imageSrcset);
   image.setAttribute("sizes", "(max-width: 360px) 200px, (max-width: 640px) 400px, 800px");
+  image.setAttribute("alt", "Picture of " + restaurant.name);
   li.append(image);
 
   const name = document.createElement('h1');
