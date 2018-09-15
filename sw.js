@@ -62,6 +62,8 @@ self.addEventListener('activate', function(event) {
 	);
 });
 
+// Found help in student-curated resources
+// Thanks to Matthew Cranford website https://matthewcranford.com/restaurant-reviews-app-walkthrough-part-4-service-workers/
 self.addEventListener('fetch', function(event) {
 	event.respondWith(
 		caches.match(event.request).then(function(response) {

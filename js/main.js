@@ -163,7 +163,9 @@ fillRestaurantsHTML = (restaurants = self.restaurants) => {
   addMarkersToMap();
 
   // set all focusable items in leaflet map to tabindex of -1, so we cannot tab into them
-  document.querySelector('.leaflet-container').tabIndex = -1;
+  // document.querySelector('.leaflet-container').tabIndex = -1;
+  const mapEl = document.querySelector('.leaflet-container');
+  mapEl.setAttribute("aria-label", "map");
   const leafletMarkers = document.querySelectorAll('.leaflet-marker-icon');
   leafletMarkers.forEach(function(marker) {
     marker.tabIndex = -1;

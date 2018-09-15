@@ -34,7 +34,9 @@ initMap = () => {
       DBHelper.mapMarkerForRestaurant(self.restaurant, self.newMap);
     }
     // set all focusable items in leaflet map to tabindex of -1, so we cannot tab into them
-    document.querySelector('.leaflet-container').tabIndex = -1;
+    // document.querySelector('.leaflet-container').tabIndex = -1;
+    const mapEl = document.querySelector('.leaflet-container');
+    mapEl.setAttribute("aria-label", "map");
     document.querySelector('.leaflet-marker-icon').tabIndex = -1;
     document.querySelector('.leaflet-control-zoom-in').tabIndex = -1;
     document.querySelector('.leaflet-control-zoom-out').tabIndex = -1;
@@ -165,6 +167,7 @@ createReviewHTML = (review) => {
   const li = document.createElement('li');
   const name = document.createElement('p');
   name.innerHTML = review.name;
+  li.setAttribute("tabIndex", "0");
   li.appendChild(name);
 
   const date = document.createElement('p');

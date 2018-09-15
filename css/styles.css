@@ -105,6 +105,10 @@ nav h1 a {
   width: 100%;
   background-color: #ccc;
 }
+
+#map:focus {
+  border: 5px solid blue;
+}
 /* ====================== Restaurant Filtering ====================== */
 .filter-options {
   width: 100%;
